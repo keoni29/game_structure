@@ -1,3 +1,7 @@
+/** Filename: main.cpp
+ ** Author: Koen van Vliet <8by8mail@gmail.com>
+ **/
+
 /* Include Files */
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -6,6 +10,8 @@
 #include <iostream>
 #include "environment.h"
 #include "renderer.h"
+#include "input.h"
+#include "event.h"
 
 int TILESIZE = 30;
 int SCREEN_WIDTH = TILESIZE * 31;
@@ -49,29 +55,16 @@ int main() {
 	}
 	sRenderer.setEnvironment(&env);
 
+	/* Load resources */
 	SDL_Texture* tileSet = sRenderer.loadTexture("data/tileSheet.png");
 	sRenderer.setTileSet(tileSet);
 
-	/* Main game loop */
-	SDL_Event e;
-	bool quit = false;
+	Input inputController;
+	Event eventManager(&inputController);
 
-	while(!quit) {
-		while( SDL_PollEvent( &e ) != 0 )
-		{
-			if( e.type == SDL_QUIT )
-			{
-				quit = true;
-			} 
-			else if (e.type == SDL_KEYDOWN)
-			{
-				switch (e.key.keysym.sym)
-				{
-					default: 
-					break;
-				}
-			}
-		}
+	/* Main game loop */
+	while (inputController.process()) {
+		eventManager.step();
 		sRenderer.render();
 	}
 

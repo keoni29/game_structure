@@ -1,3 +1,7 @@
+/** Filename: environment.h
+ ** Author: Koen van Vliet <8by8mail@gmail.com>
+ **/
+
 #ifndef __environment
 #define __environment
 class Environment {

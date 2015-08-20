@@ -1,3 +1,7 @@
+/** Filename: renderer.cpp
+ ** Author: Koen van Vliet <8by8mail@gmail.com>
+ **/
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <vector>
@@ -93,7 +97,6 @@ SDL_Texture* Renderer::loadTexture( std::string path )
 }
 
 Renderer::~Renderer() {
-	cout << "Deleting Renderer object." << endl;
 	//Destroy window	
 	SDL_DestroyRenderer( hwRenderer );
 	hwRenderer = NULL;

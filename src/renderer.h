@@ -1,3 +1,7 @@
+/** Filename: renderer.h
+ ** Author: Koen van Vliet <8by8mail@gmail.com>
+ **/
+
 #ifndef __renderer
 #define __renderer
 /* Renderer class will take care of all graphics rendering */

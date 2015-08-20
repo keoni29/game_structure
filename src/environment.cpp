@@ -1,7 +1,7 @@
 /** Filename: environment.cpp
  ** Author: Koen van Vliet <8by8mail@gmail.com>
- ** Version: -
  **/
+ 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
