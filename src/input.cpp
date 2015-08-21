@@ -17,6 +17,10 @@ Input::Input(){
 	cout << "Created keyMap with size " << keyMap.size() << "." << endl;
 }
 
+bool operator ==(const Key&k1, const Key &k2) {
+	return (k1.code == k2.code && k1.direction == k2.direction);
+}
+
 bool Input::process(){
 	bool running = true;
 	while( SDL_PollEvent( &e ) != 0 )

@@ -7,7 +7,9 @@ class Event {
 public:
 	Event(Input* inputController);
 	void step();
+	void registerGameObject(GameObject* g);
 private:
 	Input* in;
+	std::vector<GameObject*>eventObject;
 };
 #endif

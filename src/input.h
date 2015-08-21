@@ -1,5 +1,13 @@
 #ifndef __input
 #define __input
+enum {
+	move_up, move_down, move_left, move_right
+};
+
+enum {
+	key_down = 1, key_up = 0
+};
+
 class Key {
 public:
 	int code;

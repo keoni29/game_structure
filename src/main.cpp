@@ -11,6 +11,7 @@
 #include "environment.h"
 #include "renderer.h"
 #include "input.h"
+#include "gameobject.h"
 #include "event.h"
 
 int TILESIZE = 30;
@@ -61,6 +62,10 @@ int main() {
 
 	Input inputController;
 	Event eventManager(&inputController);
+
+	/* Create game objects and register them with event manager */
+	Player p;
+	eventManager.registerGameObject(&p);
 
 	/* Main game loop */
 	while (inputController.process()) {
