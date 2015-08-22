@@ -2,9 +2,7 @@
  ** Author: Koen van Vliet <8by8mail@gmail.com>
  **/
 
-#include <SDL2/SDL.h>
 #include <iostream>
-#include <vector>
 #include "input.h"
 
 using namespace std;

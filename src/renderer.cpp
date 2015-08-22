@@ -2,12 +2,7 @@
  ** Author: Koen van Vliet <8by8mail@gmail.com>
  **/
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <vector>
-#include <string>
 #include <iostream>
-#include "environment.h"
 #include "renderer.h"
 
 extern int SCREEN_WIDTH;
@@ -18,6 +13,15 @@ using namespace std;
 
 Renderer::Renderer() {
 
+}
+
+void Renderer::registerGameObject(GameObject* g) {
+	drawObject.push_back(g);
+	int xx = g->x;
+	int yy = g->y;
+	int ww = g->w;
+	int hh = g->h;
+	cout << "Renderer: Registered object with x=" << xx << ", y=" << yy << ", w=" << ww << ", h=" << hh << endl;
 }
 
 void Renderer::setTileSet(SDL_Texture* s) {
@@ -39,7 +43,7 @@ void Renderer::render() {
 	{
 		for(int xx = 0; xx < width; xx++)
 		{
-			int tid = env->placeGetTile(xx,yy);
+			int tid = env->gridGetTile(xx,yy);
 			if (tid)
 			{
 				//int f = tileFrame->at(tid-1);
@@ -49,6 +53,17 @@ void Renderer::render() {
 				SDL_RenderCopy( hwRenderer, tileSet, &clip, &rect );
 			}
 		}
+	}
+
+	for(int i = 0; i < drawObject.size(); i++) {
+		GameObject* g = drawObject.at(i);
+		SDL_Texture* tex = g->tex;
+		int xx = g->x;
+		int yy = g->y;
+		int ww = g->w;
+		int hh = g->h;
+		SDL_Rect rect = {xx, yy, ww, hh};
+		SDL_RenderCopy( hwRenderer, tex, NULL, &rect );
 	}
 
 	SDL_RenderPresent(hwRenderer);

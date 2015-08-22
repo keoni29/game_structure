@@ -1,5 +1,8 @@
 #ifndef __input
 #define __input
+#include <SDL2/SDL.h>
+#include <vector>
+
 enum {
 	move_up, move_down, move_left, move_right
 };

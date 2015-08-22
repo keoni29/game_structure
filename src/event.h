@@ -3,6 +3,10 @@
  **/
 #ifndef __event
 #define __event
+#include <SDL2/SDL.h>
+#include <vector>
+#include "input.h"
+#include "gameobject.h"
 class Event {
 public:
 	Event(Input* inputController);

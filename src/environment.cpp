@@ -2,11 +2,10 @@
  ** Author: Koen van Vliet <8by8mail@gmail.com>
  **/
  
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <iostream>
-#include <vector>
 #include "environment.h"
+
+extern int TILESIZE;
 
 using namespace std;
 
@@ -35,6 +34,10 @@ void Environment::loadFile(FILE* worldFile)
 		char buf[200];
 		fread(buf, 1, sizeof(buf), worldFile);
 		packSize = buf[198] * buf[199];
+
+		width = buf[3];
+		height = buf[4];
+
 		while (size_t len = fread(buf, 1, sizeof(buf), worldFile))
 			worldBuffer.insert(worldBuffer.end(), buf, buf + len);
 		cout << "Loaded  " << worldBuffer.size() << " bytes in worldBuffer..." << endl;
@@ -43,9 +46,6 @@ void Environment::loadFile(FILE* worldFile)
 	{
 		cout << "Could not load worldFile..." << endl;
 	}
-
-	width = 31;
-	height = 18;
 }
 
 /* Load single level from worldBuffer into the tileMap */
@@ -72,15 +72,15 @@ void Environment::loadLevel(int level)
 
 bool Environment::placeCheckSolid(int x, int y) const
 {
-	int tid = placeGetTile(x, y);
-	return tid > 3;
+	int tid = gridGetTile(x / TILESIZE, y /TILESIZE);
+	return tid >= 3;
 }
 
-int Environment::placeGetTile(int x, int y) const
+int Environment::gridGetTile(int gx, int gy) const
 {
-	if (x >= 0 && x < width && y >=0 && y < height)
+	if (gx >= 0 && gx < width && gy >=0 && gy < height)
 	{
-		int tid = tileMap.at(y * width + x);
+		int tid = tileMap.at(gy * width + gx);
 		return tid;
 	}
 	else

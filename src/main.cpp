@@ -9,9 +9,9 @@
 #include <string>
 #include <iostream>
 #include "environment.h"
-#include "renderer.h"
 #include "input.h"
 #include "gameobject.h"
+#include "renderer.h"
 #include "event.h"
 
 int TILESIZE = 30;
@@ -58,14 +58,17 @@ int main() {
 
 	/* Load resources */
 	SDL_Texture* tileSet = sRenderer.loadTexture("data/tileSheet.png");
+	SDL_Texture* tex_player = sRenderer.loadTexture("data/player.png");
 	sRenderer.setTileSet(tileSet);
 
 	Input inputController;
 	Event eventManager(&inputController);
 
 	/* Create game objects and register them with event manager */
-	Player p;
+	Player p(&env);
+	p.setTexture(tex_player);
 	eventManager.registerGameObject(&p);
+	sRenderer.registerGameObject(&p);
 
 	/* Main game loop */
 	while (inputController.process()) {
